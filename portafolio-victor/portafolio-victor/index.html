@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Víctor Osorio · Portafolio</title>
+<meta name="description" content="Portafolio de Víctor Osorio: voluntariado, liderazgo, circuitos y su camino hacia la electrotecnia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --mask:#06140d; --board:#0b2418; --board2:#103321;
+  --trace:#1f8a4c; --glow:#3ddc84; --gold:#d9b95c;
+  --text:#e4f3e9; --muted:#9db8a8;
+  --head:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--body);background:var(--mask);color:var(--text);line-height:1.65;overflow-x:hidden}
+body.barco-on, body.barco-on a, body.barco-on button, body.barco-on summary{cursor:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+h1,h2,h3{font-family:var(--head);line-height:1.1}
+.wrap{width:min(1120px,92%);margin:0 auto}
+section{padding:96px 0;position:relative}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.pcb{background-color:var(--board);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cg fill='none' stroke='%231f8a4c' stroke-opacity='.35' stroke-width='2'%3E%3Cpath d='M0 40h70l20 20h60M0 120h40l30-30h80l20 20h70M60 240v-60l30-30M180 0v50l30 30h30M120 240v-40h60l20-20h40'/%3E%3C/g%3E%3Cg fill='%23061a0f' stroke='%231f8a4c' stroke-opacity='.5' stroke-width='2'%3E%3Ccircle cx='70' cy='40' r='4'/%3E%3Ccircle cx='150' cy='60' r='4'/%3E%3Ccircle cx='40' cy='120' r='4'/%3E%3Ccircle cx='220' cy='110' r='4'/%3E%3Ccircle cx='90' cy='150' r='4'/%3E%3Ccircle cx='210' cy='80' r='4'/%3E%3C/g%3E%3C/svg%3E")}
+
+/* Barra superior */
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(6,20,13,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--trace);box-shadow:0 4px 24px rgba(0,0,0,.4)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--head);font-weight:800;font-size:1.3rem;display:flex;align-items:center;gap:10px}
+.logo .ic{color:var(--glow);font-size:1.5rem;filter:drop-shadow(0 0 8px var(--glow))}
+.dots{width:46px;height:46px;border-radius:50%;border:2px solid var(--trace);background:var(--board2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:.25s}
+.dots:hover,.dots[aria-expanded="true"]{border-color:var(--glow);box-shadow:0 0 16px rgba(61,220,132,.4)}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--glow);display:block}
+#menu{position:absolute;right:4%;top:calc(100% + 10px);width:min(280px,92vw);background:var(--board);border:2px solid var(--trace);border-radius:14px;padding:10px;box-shadow:0 18px 50px rgba(0,0,0,.6);display:none}
+#menu.abierto{display:block;animation:entra .25s both}
+#menu a{display:block;padding:12px 16px;border-radius:9px;border-left:3px solid transparent;transition:.2s}
+#menu a:hover{background:var(--board2);color:var(--glow);border-left-color:var(--glow)}
+
+.btn{display:inline-block;background:var(--glow);color:var(--mask);font-weight:500;padding:12px 26px;border-radius:6px;border:2px solid var(--glow);transition:.25s;font-family:var(--body);font-size:1rem;cursor:pointer}
+.btn:hover{background:transparent;color:var(--glow)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--trace)}
+.btn.ghost:hover{border-color:var(--glow);color:var(--glow)}
+
+/* Portada */
+#inicio{min-height:100vh;display:flex;align-items:center;padding:130px 0 80px;overflow:hidden}
+#particulas{position:absolute;inset:0;width:100%;height:100%}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,7vw,5.4rem);font-weight:800;letter-spacing:-.02em}
+.roles{display:flex;flex-wrap:wrap;margin:16px 0 22px;font-family:var(--head);font-weight:500;font-size:1.2rem;color:var(--glow)}
+.roles span{padding:0 18px;border-left:2px solid var(--trace)}
+.roles span:first-child{padding-left:0;border:0}
+.hero p.frase{max-width:520px;color:var(--muted);margin-bottom:30px}
+.hero .acciones{display:flex;gap:14px;flex-wrap:wrap}
+.hero-grid>*{animation:entra .9s both}
+.hero-grid>*:nth-child(2){animation-delay:.25s}
+@keyframes entra{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+.chip{position:relative;width:min(340px,80%);aspect-ratio:1;margin:0 auto;padding:30px;background:var(--board2);border:2px solid var(--trace);border-radius:18px;box-shadow:0 0 60px rgba(61,220,132,.18)}
+.chip::before,.chip::after{content:"";position:absolute;top:30px;bottom:30px;width:10px;background:repeating-linear-gradient(var(--gold) 0 14px,transparent 14px 34px)}
+.chip::before{left:-15px}.chip::after{right:-15px}
+.chip .marco{position:relative;width:100%;height:100%;border-radius:10px;overflow:hidden}
+.chip i.punto{position:absolute;top:12px;left:12px;width:12px;height:12px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px var(--glow);z-index:2;animation:late 2s infinite}
+@keyframes late{50%{opacity:.35}}
+
+/* Espacios de imagen: si falta el archivo se ve su nombre */
+.ph{position:relative;background:linear-gradient(135deg,var(--board2),var(--board));border:1px dashed var(--trace);display:grid;place-content:center;text-align:center;color:var(--muted);font-size:.85rem;overflow:hidden}
+.ph::after{content:attr(data-file);padding:0 8px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Objetos flotantes */
+.f{position:absolute;pointer-events:none}
+.blob{border-radius:50%;filter:blur(60px);background:var(--trace);opacity:.35;animation:flota 14s ease-in-out infinite}
+.b1{width:340px;height:340px;top:8%;left:-80px}
+.b2{width:280px;height:280px;bottom:4%;right:6%;background:var(--glow);opacity:.18;animation-delay:-6s}
+.orb{width:16px;height:16px;border-radius:50%;background:var(--glow);box-shadow:0 0 24px 6px rgba(61,220,132,.6);animation:flota 9s ease-in-out infinite}
+.o1{top:22%;left:46%}.o2{bottom:18%;left:12%;animation-delay:-4s}
+.cubo{width:44px;height:44px;border:2px solid var(--gold);opacity:.55;animation:gira 16s linear infinite}
+.c1{top:18%;right:14%}.c2{bottom:12%;left:42%;width:28px;height:28px;animation-direction:reverse}
+.anillo{width:90px;height:90px;border-radius:50%;border:2px solid var(--glow);animation:pulso 4s ease-out infinite}
+.a1{top:60%;left:5%}.a2{top:12%;right:34%;animation-delay:-2s;width:60px;height:60px}
+.bote{width:46px;color:var(--glow);opacity:.22;animation:bote 7s ease-in-out infinite}
+.bt1{bottom:9%;left:24%}.bt2{top:30%;right:4%;animation-delay:-3s;width:36px}.bt3{top:16%;left:30%;animation-delay:-5s;width:30px}
+.sim{width:38px;height:38px;color:var(--gold);opacity:.4;animation:flota 11s ease-in-out infinite}
+.s1{top:30%;left:38%}.s2{bottom:22%;right:30%;animation-delay:-3s}.s3{top:70%;left:18%;animation-delay:-7s}.s4{top:14%;right:6%;animation-delay:-5s}
+@keyframes flota{50%{transform:translate(24px,-30px)}}
+@keyframes gira{to{transform:rotate(360deg)}}
+@keyframes pulso{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+@keyframes bote{50%{transform:translateY(-12px) rotate(4deg)}}
+
+#barco{position:fixed;top:0;left:0;width:38px;height:32px;z-index:100;pointer-events:none;color:var(--gold);display:none;filter:drop-shadow(0 0 6px rgba(217,185,92,.6))}
+body.barco-on #barco{display:block}
+
+/* Secciones */
+.titulo{margin-bottom:42px}
+.titulo h2{font-size:clamp(2rem,4.5vw,3rem)}
+.titulo p{color:var(--muted);margin-top:10px;max-width:540px}
+.titulo::after{content:"";display:block;width:84px;height:4px;margin-top:18px;background:linear-gradient(90deg,var(--glow),transparent);border-radius:2px}
+.sobre{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.sobre .ph{aspect-ratio:4/5;border-radius:14px}
+.sobre p{margin-bottom:18px;max-width:62ch}
+.valores{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.valores span{border:1px solid var(--trace);border-radius:999px;padding:6px 18px;color:var(--glow);font-size:.95rem}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.panel{background:var(--board2);border:1px solid var(--trace);border-radius:14px;padding:30px}
+.panel h3{font-size:1.4rem;margin-bottom:18px}
+.panel ul{list-style:none;display:grid;gap:16px}
+.panel li{display:flex;gap:16px;align-items:center}
+.panel li .ic{font-size:1.9rem;color:var(--glow);padding:8px;box-sizing:content-box;border:1px solid var(--trace);border-radius:10px;background:var(--board)}
+.panel li small{display:block;color:var(--muted)}
+
+.tarjetas{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.tarjeta{background:var(--board2);border:1px solid var(--trace);border-radius:14px;overflow:hidden}
+.tarjeta:nth-child(even){transform:translateY(24px)}
+.tarjeta .ph{aspect-ratio:16/9;border:0;border-bottom:1px dashed var(--trace)}
+.tarjeta div.t{padding:24px}
+.tarjeta h3{font-size:1.3rem;margin-bottom:4px}
+.tarjeta .lugar{color:var(--glow);font-size:.92rem;margin-bottom:10px}
+.tarjeta p{color:var(--muted);font-size:.97rem}
+
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.galeria .ph{aspect-ratio:1;border-radius:10px}
+
+.futuro{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.futuro p{max-width:58ch;margin-bottom:18px}
+.futuro .ph{aspect-ratio:4/3;border-radius:14px}
+.meta{border-left:4px solid var(--gold);padding-left:18px;margin:26px 0;font-family:var(--head);font-size:1.25rem}
+
+details{background:var(--board2);border:1px solid var(--trace);border-radius:12px;margin-bottom:16px;overflow:hidden}
+summary{list-style:none;padding:22px 26px;font-family:var(--head);font-size:1.2rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary .fl{width:10px;height:10px;border-right:2px solid var(--glow);border-bottom:2px solid var(--glow);transform:rotate(45deg);transition:transform .3s;margin-bottom:4px}
+details[open] summary .fl{transform:rotate(-135deg);margin-bottom:-4px}
+details[open]{border-color:var(--glow)}
+.contenido{padding:4px 26px 28px}
+#carta-vista{white-space:pre-wrap;max-width:66ch}
+#carta-texto{min-height:260px;resize:vertical}
+.nota{font-size:.88rem;color:var(--muted);margin-top:10px}
+.herr{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.video-caja{aspect-ratio:16/9;border-radius:10px}
+.video-caja video{position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain}
+
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.dato{display:flex;gap:16px;align-items:center;padding:18px 22px;background:var(--board2);border:1px solid var(--trace);border-radius:12px;margin-bottom:14px;transition:.25s}
+a.dato:hover{border-color:var(--glow);transform:translateX(6px)}
+.dato .ic{font-size:1.7rem;color:var(--glow)}
+.dato small{display:block;color:var(--muted)}
+form{display:grid;gap:14px}
+input,textarea{width:100%;background:var(--mask);border:1px solid var(--trace);color:var(--text);padding:14px;border-radius:8px;font:inherit}
+input:focus,textarea:focus{outline:none;border-color:var(--glow)}
+
+footer{padding:36px 0;border-top:1px solid var(--trace);text-align:center;color:var(--muted);font-size:.92rem}
+footer .logo{justify-content:center;margin-bottom:10px;color:var(--text)}
+
+@media(max-width:900px){
+  .hero-grid,.sobre,.cols,.futuro,.contacto-grid{grid-template-columns:1fr}
+  .tarjetas{grid-template-columns:1fr}.tarjeta:nth-child(even){transform:none}
+  .galeria{grid-template-columns:repeat(2,1fr)}
+  .chip{order:-1}
+  section{padding:72px 0}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- Íconos propios (dibujados con líneas, sin emojis) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="b" viewBox="0 0 48 40"><path fill="currentColor" d="M22 2v22H8L22 2zm4 6 14 16H26V8zM4 28h40l-6 10H10L4 28z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10h16M4 15h16M10 4v16"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></symbol>
+  <symbol id="i-res" viewBox="0 0 24 24"><path d="M2 12h4l2-5 3 10 3-10 2 5h6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 0 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+</svg>
+<div id="barco" aria-hidden="true"><svg viewBox="0 0 48 40" width="38" height="32"><use href="#b"/></svg></div>
+
+<!-- BARRA SUPERIOR -->
+<header>
+  <div class="wrap">
+    <a href="#inicio" class="logo"><svg class="ic"><use href="#i-bolt"/></svg> Víctor Osorio</a>
+    <button class="dots" id="dots" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav id="menu" aria-label="Secciones">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#galeria">Galería</a>
+      <a href="#futuro">Mi futuro</a>
+      <a href="#recuerdos">Cápsula del tiempo</a>
+      <a href="#contacto">Deja tu mensaje</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PORTADA -->
+<section id="inicio" class="hero pcb">
+  <canvas id="particulas"></canvas>
+  <span class="f blob b1"></span><span class="f blob b2"></span>
+  <span class="f orb o1"></span><span class="f orb o2"></span>
+  <span class="f cubo c1"></span><span class="f cubo c2"></span>
+  <span class="f anillo a1"></span><span class="f anillo a2"></span>
+  <svg class="f ic sim s1"><use href="#i-bolt"/></svg>
+  <svg class="f ic sim s2"><use href="#i-chip"/></svg>
+  <svg class="f ic sim s3"><use href="#i-res"/></svg>
+  <svg class="f ic sim s4"><use href="#i-gear"/></svg>
+  <svg class="f bote bt1" viewBox="0 0 48 40"><use href="#b"/></svg>
+  <svg class="f bote bt2" viewBox="0 0 48 40"><use href="#b"/></svg>
+  <svg class="f bote bt3" viewBox="0 0 48 40"><use href="#b"/></svg>
+
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Víctor Osorio</h1>
+      <p class="roles"><span>Futuro electrotécnico</span><span>Voluntario</span><span>Líder</span></p>
+      <p class="frase">Quiero construir una vida que refleje el esfuerzo que pongo en cada oportunidad, poder mirar atrás con orgullo y crear un futuro que de verdad pueda llamar mío.</p>
+      <div class="acciones">
+        <a class="btn" href="#experiencia">Ver mi experiencia</a>
+        <a class="btn ghost" href="#contacto">Deja tu mensaje</a>
+      </div>
+    </div>
+    <div class="chip">
+      <i class="punto"></i>
+      <!-- TU FOTO: reemplaza el archivo img/foto-perfil.jpg -->
+      <div class="marco ph" data-file="img/foto-perfil.jpg"><img src="img/foto-perfil.jpg" alt="Foto de Víctor Osorio" onerror="this.remove()"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="wrap sobre">
+    <div class="ph" data-file="img/sobre-mi.jpg"><img src="img/sobre-mi.jpg" alt="Víctor Osorio" onerror="this.remove()"></div>
+    <div>
+      <div class="titulo"><h2>Sobre mí</h2></div>
+      <p>Soy Víctor Osorio, de La Chorrera, Panamá. Lo que mejor me define es la forma en que ayudo a los demás: me nace apoyar a quienes me rodean y buscar la manera de que cada persona se sienta escuchada y acompañada.</p>
+      <p>Me considero una persona de pensamiento crítico. Me gusta entender las cosas a fondo, hacerme preguntas y buscar mejores soluciones antes de dar algo por hecho.</p>
+      <p>Mis valores son el respeto, la perseverancia y la paciencia. Creo que el esfuerzo constante, tratar bien a los demás y saber esperar el momento justo son lo que me permite avanzar con paso firme.</p>
+      <div class="valores"><span>Respeto</span><span>Perseverancia</span><span>Paciencia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="habilidades" class="pcb">
+  <div class="wrap">
+    <div class="titulo"><h2>Habilidades</h2><p>Lo que sé hacer y la forma en que me gusta trabajar.</p></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Habilidades blandas</h3>
+        <ul>
+          <li><svg class="ic"><use href="#i-bulb"/></svg><div>Pensamiento crítico<small>Analizo antes de decidir y busco mejores caminos.</small></div></li>
+          <li><svg class="ic"><use href="#i-heart"/></svg><div>Ayudar a los demás<small>Lo que mejor me define.</small></div></li>
+          <li><svg class="ic"><use href="#i-flag"/></svg><div>Liderazgo<small>Lo desarrollé como escolta y en mis actividades.</small></div></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Habilidades duras</h3>
+        <ul>
+          <li><svg class="ic"><use href="#i-chip"/></svg><div>Armado de circuitos<small>Me encanta armarlos y ver cómo cobran vida.</small></div></li>
+          <li><svg class="ic"><use href="#i-doc"/></svg><div>Notion<small>Para organizar ideas, tareas y proyectos.</small></div></li>
+          <li><svg class="ic"><use href="#i-grid"/></svg><div>Excel y Excel Expert<small>Manejo de datos y hojas de cálculo.</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="wrap">
+    <div class="titulo"><h2>Experiencia y actividades</h2><p>Los lugares donde he aprendido, servido y crecido.</p></div>
+    <div class="tarjetas">
+      <article class="tarjeta">
+        <div class="ph" data-file="img/techo.jpg"><img src="img/techo.jpg" alt="Voluntariado en Techo Panamá" onerror="this.remove()"></div>
+        <div class="t"><h3>Voluntariado en Techo Panamá</h3><p class="lugar">Voluntario</p>
+        <p>Participo como voluntario en Techo Panamá, donde he podido ayudar a otros de forma directa y aprender el valor de trabajar en equipo por una causa que importa.</p></div>
+      </article>
+      <article class="tarjeta">
+        <div class="ph" data-file="img/superte.jpg"><img src="img/superte.jpg" alt="Superté" onerror="this.remove()"></div>
+        <div class="t"><h3>Superté</h3><p class="lugar">Fundación Alberto Motta, La Chorrera</p>
+        <p>Formo parte de Superté en la Fundación Alberto Motta, un espacio que me ayuda a seguir creciendo y a prepararme para lo que viene.</p></div>
+      </article>
+      <article class="tarjeta">
+        <div class="ph" data-file="img/escolta.jpg"><img src="img/escolta.jpg" alt="Escolta" onerror="this.remove()"></div>
+        <div class="t"><h3>Escolta</h3><p class="lugar">Liderazgo</p>
+        <p>Ser escolta me ha enseñado disciplina, responsabilidad y compromiso, y me ha convertido en un líder capaz de dar el ejemplo.</p></div>
+      </article>
+      <article class="tarjeta">
+        <div class="ph" data-file="img/mac-panama.jpg"><img src="img/mac-panama.jpg" alt="Pasantía en el MAC Panamá" onerror="this.remove()"></div>
+        <div class="t"><h3>Pasantía en el MAC Panamá</h3><p class="lugar">Museo de Arte Contemporáneo</p>
+        <p>Realicé una pasantía en el Museo de Arte Contemporáneo de Panamá, una experiencia que me acercó al mundo laboral y a la cultura.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria" class="pcb">
+  <div class="wrap">
+    <div class="titulo"><h2>Galería</h2><p>Momentos que cuentan mi camino.</p></div>
+    <div class="galeria">
+      <div class="ph" data-file="img/galeria-1.jpg"><img src="img/galeria-1.jpg" alt="" onerror="this.remove()"></div>
+      <div class="ph" data-file="img/galeria-2.jpg"><img src="img/galeria-2.jpg" alt="" onerror="this.remove()"></div>
+      <div class="ph" data-file="img/galeria-3.jpg"><img src="img/galeria-3.jpg" alt="" onerror="this.remove()"></div>
+      <div class="ph" data-file="img/galeria-4.jpg"><img src="img/galeria-4.jpg" alt="" onerror="this.remove()"></div>
+      <div class="ph" data-file="img/galeria-5.jpg"><img src="img/galeria-5.jpg" alt="" onerror="this.remove()"></div>
+      <div class="ph" data-file="img/galeria-6.jpg"><img src="img/galeria-6.jpg" alt="" onerror="this.remove()"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MI FUTURO -->
+<section id="futuro">
+  <div class="wrap futuro">
+    <div>
+      <div class="titulo"><h2>Mi futuro</h2></div>
+      <p>Mi meta es formar parte de la Universidad Marítima de Panamá y estudiar la carrera de Electrotecnia. Nada me haría más feliz que lograrlo.</p>
+      <p class="meta">Un futuro que pueda llamar mío.</p>
+      <p>Armar circuitos me apasiona, y quiero convertir esa curiosidad en una profesión con la que pueda aportar a mi comunidad y a mi país.</p>
+    </div>
+    <div class="ph" data-file="img/futuro.jpg"><img src="img/futuro.jpg" alt="Mi futuro" onerror="this.remove()"></div>
+  </div>
+</section>
+
+<!-- CÁPSULA DEL TIEMPO -->
+<section id="recuerdos" class="pcb">
+  <div class="wrap">
+    <div class="titulo"><h2>Cápsula del tiempo</h2><p>Toca cada una para abrirla.</p></div>
+
+    <details>
+      <summary>Carta a mi yo del futuro <span class="fl"></span></summary>
+      <div class="contenido">
+        <!-- CARTA. Opción A: cambia el texto de abajo (dentro de <div id="carta-vista">) por el tuyo.
+             Opción B: abre tu página con "?editar" al final del enlace y escribe directo en la página. -->
+        <div id="carta-vista">Querido yo del futuro:
+
+Si estás leyendo esto, espero que hayas llegado a donde soñabas y que puedas mirar atrás con orgullo. Todo el esfuerzo que puse en cada oportunidad fue para construir una vida que de verdad pudiera llamar mía.
+
+Recuerda de dónde vienes, a quienes ayudaste y a quienes te ayudaron. Sigue siendo una persona respetuosa, perseverante y paciente.
+
+Con cariño, Víctor</div>
+        <textarea id="carta-texto" hidden placeholder="Escribe aquí tu carta…"></textarea>
+        <div class="herr" id="carta-herr" hidden>
+          <button class="btn" id="carta-editar" type="button">Escribir mi carta</button>
+          <button class="btn ghost" id="carta-guardar" type="button" hidden>Guardar</button>
+        </div>
+        <p class="nota" id="carta-nota" hidden>Lo que escribas aquí se guarda en este navegador. Para que todos lo vean en tu página, pégalo dentro de carta-vista en el código.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Video de todo lo que hemos pasado <span class="fl"></span></summary>
+      <div class="contenido">
+        <!-- VIDEO: reemplaza el archivo video/recuerdos.mp4 (portada opcional: img/video-portada.jpg) -->
+        <div class="video-caja ph" data-file="video/recuerdos.mp4">
+          <video controls preload="metadata" poster="img/video-portada.jpg">
+            <source src="video/recuerdos.mp4" type="video/mp4" onerror="this.closest('video').remove()">
+          </video>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- DEJA TU MENSAJE -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="titulo"><h2>Deja tu mensaje</h2><p>¿Quieres hablar conmigo? Escríbeme.</p></div>
+    <div class="contacto-grid">
+      <div>
+        <!-- CAMBIA estos datos por los tuyos -->
+        <a class="dato" href="mailto:TU-CORREO@ejemplo.com"><svg class="ic"><use href="#i-mail"/></svg><div>Correo<small>TU-CORREO@ejemplo.com</small></div></a>
+        <a class="dato" href="https://wa.me/50700000000"><svg class="ic"><use href="#i-chat"/></svg><div>WhatsApp<small>+507 0000-0000</small></div></a>
+        <a class="dato" href="https://www.instagram.com/TU_USUARIO"><svg class="ic"><use href="#i-cam"/></svg><div>Instagram<small>@TU_USUARIO</small></div></a>
+        <div class="dato"><svg class="ic"><use href="#i-pin"/></svg><div>Ubicación<small>La Chorrera, Panamá Oeste, Panamá</small></div></div>
+      </div>
+      <!-- Pon tu correo en "action" (reemplaza TU-CORREO@ejemplo.com). La primera vez que alguien envíe un mensaje, te llegará un correo para confirmar. -->
+      <form action="https://formsubmit.co/TU-CORREO@ejemplo.com" method="POST">
+        <input type="hidden" name="_subject" value="Nuevo mensaje en mi portafolio">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <textarea name="mensaje" rows="6" placeholder="Tu mensaje" required></textarea>
+        <button class="btn" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><svg class="ic"><use href="#i-bolt"/></svg> Víctor Osorio</div>
+    <p>© 2026 Víctor Osorio · La Chorrera, Panamá</p>
+  </div>
+</footer>
+
+<script>
+// Menú de tres puntitos
+const dots=document.getElementById('dots'),menu=document.getElementById('menu');
+function cerrar(){menu.classList.remove('abierto');dots.setAttribute('aria-expanded','false')}
+dots.onclick=e=>{e.stopPropagation();const a=menu.classList.toggle('abierto');dots.setAttribute('aria-expanded',a)};
+menu.querySelectorAll('a').forEach(a=>a.onclick=cerrar);
+document.addEventListener('click',e=>{if(!menu.contains(e.target))cerrar()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar()});
+
+const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Carta: todos ven el texto del código; solo tú puedes editarla en la página con ?editar
+(function(){
+  const vista=document.getElementById('carta-vista'),area=document.getElementById('carta-texto'),
+        herr=document.getElementById('carta-herr'),ed=document.getElementById('carta-editar'),
+        gu=document.getElementById('carta-guardar'),nota=document.getElementById('carta-nota');
+  if(!location.search.includes('editar'))return;
+  let guardada=null;try{guardada=localStorage.getItem('carta-victor')}catch(e){}
+  if(guardada)vista.textContent=guardada;
+  herr.hidden=false;nota.hidden=false;
+  ed.onclick=()=>{area.value=vista.textContent;area.hidden=false;vista.hidden=true;gu.hidden=false;ed.hidden=true;area.focus()};
+  gu.onclick=()=>{vista.textContent=area.value;try{localStorage.setItem('carta-victor',area.value)}catch(e){}
+    area.hidden=true;vista.hidden=false;gu.hidden=true;ed.hidden=false};
+})();
+
+// Partículas
+(function(){
+  const c=document.getElementById('particulas'),x=c.getContext('2d');let w,h,p=[];
+  function medir(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;
+    p=Array.from({length:Math.min(70,Math.floor(w/18))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4}))}
+  function pinta(){x.clearRect(0,0,w,h);
+    p.forEach((a,i)=>{ if(!quieto){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>w)a.vx*=-1;if(a.y<0||a.y>h)a.vy*=-1}
+      x.fillStyle='rgba(61,220,132,.7)';x.beginPath();x.arc(a.x,a.y,2,0,7);x.fill();
+      for(let j=i+1;j<p.length;j++){const b=p[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<130){x.strokeStyle='rgba(31,138,76,'+(1-d/130)*.7+')';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}});
+    requestAnimationFrame(pinta)}
+  medir();addEventListener('resize',medir);pinta();
+})();
+
+// Barquito que sigue el mouse
+(function(){
+  if(quieto||!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
+  const b=document.getElementById('barco');document.body.classList.add('barco-on');
+  let mx=innerWidth/2,my=innerHeight/2,bx=mx,by=my,dir=1;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  (function mover(){
+    const dx=mx-bx;bx+=dx*.12;by+=(my-by)*.12;
+    if(Math.abs(dx)>1.5)dir=dx>0?1:-1;
+    const olas=Math.sin(Date.now()/250)*3;
+    b.style.transform=`translate(${bx+10}px,${by+10}px) scaleX(${dir}) rotate(${olas}deg)`;
+    requestAnimationFrame(mover)})();
+})();
+</script>
+</body>
+</html>
